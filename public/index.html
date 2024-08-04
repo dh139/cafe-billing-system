@@ -34,195 +34,195 @@
 
     <button onclick="generateInvoice()">Generate Invoice</button>
 
-<style>
-/* General Styles */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-    margin: 0;
-    padding: 20px;
-}
+    <style>
+    /* General Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
 
-h1 {
-    text-align: center;
-    color: #333;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
+    h1 {
+        text-align: center;
+        color: #333;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
 
-h3 {
-    color: #444;
-    margin-bottom: 10px;
-}
+    h3 {
+        color: #444;
+        margin-bottom: 10px;
+    }
 
-.item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.item-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 10px;
-    object-fit: cover;
-    margin-right: 20px;
-}
-
-.item-details {
-    display: flex;
-    flex-direction: column;
-}
-
-button {
-    background-color: #ff9800;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    margin: 5px 0;
-}
-
-button:hover {
-    background-color: #e68900;
-}
-
-input[type="text"] {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    width: 50px;
-    text-align: center;
-    margin-right: 10px;
-    margin-left: 10px;
-}
-
-/* Customer Phone Input */
-#customer-phone {
-    width: 100%;
-    max-width: 300px;
-}
-
-label {
-    font-weight: bold;
-    margin-bottom: 10px;
-    display: block;
-}
-
-button#generate-button {
-    display: block;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-    margin-top: 20px;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
     .item {
-        flex-direction: column;
-        align-items: flex-start;
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .item-image {
-        width: 100%;
-        height: auto;
-        margin-bottom: 10px;
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-right: 20px;
+    }
+
+    .item-details {
+        display: flex;
+        flex-direction: column;
     }
 
     button {
-        width: 100%;
-        margin-bottom: 10px;
+        background-color: #ff9800;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin: 5px 0;
+    }
+
+    button:hover {
+        background-color: #e68900;
     }
 
     input[type="text"] {
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        width: 50px;
+        text-align: center;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    /* Customer Phone Input */
+    #customer-phone {
         width: 100%;
+        max-width: 300px;
+    }
+
+    label {
+        font-weight: bold;
         margin-bottom: 10px;
+        display: block;
     }
 
-    div {
-        padding: 15px;
-    }
-}
-</style>
-
-<script>
-    function changeQuantity(itemId, change) {
-        const quantityInput = document.getElementById(`${itemId}-quantity`);
-        let currentQuantity = parseInt(quantityInput.value);
-        const newQuantity = Math.max(currentQuantity + change, 0); // Ensure quantity doesn't go below 0
-        quantityInput.value = newQuantity;
+    button#generate-button {
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        margin-top: 20px;
     }
 
-    function generateInvoice() {
-        const items = [
-            { id: 'pizza', name: 'Pizza', price: 10.00 },
-            { id: 'sandwich', name: 'Sandwich', price: 5.00 },
-        ];
-
-        let selectedItems = items.map(item => {
-            const quantity = parseInt(document.getElementById(`${item.id}-quantity`).value);
-            return { ...item, quantity, total: item.price * quantity };
-        }).filter(item => item.quantity > 0);
-
-        if (selectedItems.length === 0) {
-            alert("No items selected!");
-            return;
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        .item {
+            flex-direction: column;
+            align-items: flex-start;
         }
 
-        const invoiceDate = new Date().toLocaleString();
-        const invoiceDetails = selectedItems.map(item => `${item.name} x${item.quantity} = $${item.total.toFixed(2)}`).join('\n');
-        const totalAmount = selectedItems.reduce((sum, item) => sum + item.total, 0).toFixed(2);
-
-        const invoiceText = `
-            Invoice Date: ${invoiceDate}
-            ----------------------------------------
-            ${invoiceDetails}
-            ----------------------------------------
-            Total: $${totalAmount}
-        `;
-
-        const customerPhone = document.getElementById("customer-phone").value;
-        if (customerPhone === "") {
-            alert("Please enter the customer's WhatsApp number!");
-            return;
+        .item-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
         }
 
-        saveInvoicePDF(invoiceText, customerPhone);
-    }
+        button {
+            width: 100%;
+            margin-bottom: 10px;
+        }
 
-    function saveInvoicePDF(invoiceText, customerPhone) {
-        fetch('/save-invoice', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ invoice: invoiceText }),
-        }).then(response => response.json())
-          .then(data => {
-              console.log('Invoice saved:', data);
-              alert('Invoice saved successfully!');
-              createWhatsAppLink(customerPhone, data.fileName);
-          })
-          .catch((error) => {
-              console.error('Error:', error);
-              alert('Failed to save invoice.');
-          });
-    }
+        input[type="text"] {
+            width: 100%;
+            margin-bottom: 10px;
+        }
 
-    function createWhatsAppLink(phoneNumber, fileName) {
-        const message = `Hello, please find your invoice here: http://localhost:3000/bills/${fileName}`;
-        const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappLink, '_blank');
+        div {
+            padding: 15px;
+        }
     }
-</script>
+    </style>
+
+    <script>
+        function changeQuantity(itemId, change) {
+            const quantityInput = document.getElementById(`${itemId}-quantity`);
+            let currentQuantity = parseInt(quantityInput.value);
+            const newQuantity = Math.max(currentQuantity + change, 0); // Ensure quantity doesn't go below 0
+            quantityInput.value = newQuantity;
+        }
+
+        function generateInvoice() {
+            const items = [
+                { id: 'pizza', name: 'Pizza', price: 99.00 },
+                { id: 'sandwich', name: 'Sandwich', price: 70.00 },
+            ];
+
+            let selectedItems = items.map(item => {
+                const quantity = parseInt(document.getElementById(`${item.id}-quantity`).value);
+                return { ...item, quantity, total: item.price * quantity };
+            }).filter(item => item.quantity > 0);
+
+            if (selectedItems.length === 0) {
+                alert("No items selected!");
+                return;
+            }
+
+            const invoiceDate = new Date().toLocaleString();
+            const invoiceDetails = selectedItems.map(item => `${item.name} x${item.quantity} = ₹${item.total.toFixed(2)}`).join('\n');
+            const totalAmount = selectedItems.reduce((sum, item) => sum + item.total, 0).toFixed(2);
+
+            const invoiceText = `
+                Invoice Date: ${invoiceDate}
+                ----------------------------------------
+                ${invoiceDetails}
+                ----------------------------------------
+                Total: ₹${totalAmount}
+            `;
+
+            const customerPhone = document.getElementById("customer-phone").value;
+            if (customerPhone === "") {
+                alert("Please enter the customer's WhatsApp number!");
+                return;
+            }
+
+            saveInvoicePDF(invoiceText, customerPhone);
+        }
+
+        function saveInvoicePDF(invoiceText, customerPhone) {
+            fetch('/save-invoice', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ invoice: invoiceText }),
+            }).then(response => response.json())
+              .then(data => {
+                  console.log('Invoice saved:', data);
+                  alert('Invoice saved successfully!');
+                  createWhatsAppLink(customerPhone, data.fileName);
+              })
+              .catch((error) => {
+                  console.error('Error:', error);
+                  alert('Failed to save invoice.');
+              });
+        }
+
+        function createWhatsAppLink(phoneNumber, fileName) {
+            const message = `Hello, please find your invoice here: http://localhost:3000/bills/${fileName}`;
+            const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappLink, '_blank');
+        }
+    </script>
 </body>
 </html>
