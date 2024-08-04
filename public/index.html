@@ -219,7 +219,7 @@
         }
 
         function createWhatsAppLink(phoneNumber, fileName) {
-            const message = `Hello, please find your invoice here: http://localhost:3000/bills/${fileName}`;
+            const message = `Hello, please find your invoice here: https://cafe-billing-system.onrender.com/bills/${fileName}`;
             const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappLink, '_blank');
         }
