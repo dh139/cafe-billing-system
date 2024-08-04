@@ -4,208 +4,335 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafe Billing System</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 800px;
+            margin: 10px auto; /* Center item horizontally */
+        }
+
+        .item:hover {
+            transform: scale(1.02);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .item-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .item-details {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        button {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin: 5px 0;
+        }
+
+        button:hover {
+            background-color: #e68900;
+        }
+
+        input[type="text"] {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            width: 60px;
+            text-align: center;
+            margin: 0 10px;
+        }
+
+        .customer-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        #customer-phone {
+            width: 90%;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+            text-align: center;
+        }
+
+        button#generate-button {
+            display: block;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Display Area */
+        .bill-summary {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .bill-summary h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .bill-summary ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        .bill-summary li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .bill-summary .total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .bottom-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .bottom-section > div {
+            flex: 1;
+            margin: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .item-image {
+                width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+            }
+
+            button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .bottom-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .bottom-section > div {
+                width: 100%;
+            }
+
+            .customer-details {
+                width: 100%;
+            }
+
+            .bill-summary {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Cafe Billing System</h1>
+    <h1>Hunger Hills</h1>
 
     <div class="item">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-vyuNaOdSYfUplmINoUVTjBI5I9hHuGBr7A&s" alt="Pizza" class="item-image">
         <div class="item-details">
             <h3>Pizza - ₹99</h3>
-            <button onclick="changeQuantity('pizza', -1)">-</button>
-            <input type="text" id="pizza-quantity" value="0" readonly>
-            <button onclick="changeQuantity('pizza', 1)">+</button>
+            <div class="quantity-controls">
+                <button onclick="changeQuantity('pizza', -1)">-</button>
+                <input type="text" id="pizza-quantity" value="0" readonly>
+                <button onclick="changeQuantity('pizza', 1)">+</button>
+            </div>
         </div>
     </div>
     <div class="item">
         <img src="https://static.toiimg.com/thumb/83740315.cms?width=1200&height=900" alt="Sandwich" class="item-image">
         <div class="item-details">
             <h3>Sandwich - ₹70</h3>
-            <button onclick="changeQuantity('sandwich', -1)">-</button>
-            <input type="text" id="sandwich-quantity" value="0" readonly>
-            <button onclick="changeQuantity('sandwich', 1)">+</button>
+            <div class="quantity-controls">
+                <button onclick="changeQuantity('sandwich', -1)">-</button>
+                <input type="text" id="sandwich-quantity" value="0" readonly>
+                <button onclick="changeQuantity('sandwich', 1)">+</button>
+            </div>
         </div>
     </div>
 
-    <div>
-        <label for="customer-phone">Customer WhatsApp Number:</label>
-        <input type="text" id="customer-phone">
+    <div class="bottom-section">
+        <div id="bill-summary" class="bill-summary">
+            <h2>Selected Items</h2>
+            <ul id="item-list">
+                <!-- Items will be dynamically added here -->
+            </ul>
+            <p class="total">Total: ₹<span id="total-amount">0.00</span></p>
+        </div>
+
+        
     </div>
-
-    <button onclick="generateInvoice()">Generate Invoice</button>
-
-    <style>
-    /* General Styles */
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f5f5f5;
-        color: #333;
-        margin: 0;
-        padding: 20px;
-    }
-
-    h1 {
-        text-align: center;
-        color: #333;
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-    }
-
-    h3 {
-        color: #444;
-        margin-bottom: 10px;
-    }
-
-    .item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .item-image {
-        width: 100px;
-        height: 100px;
-        border-radius: 10px;
-        object-fit: cover;
-        margin-right: 20px;
-    }
-
-    .item-details {
-        display: flex;
-        flex-direction: column;
-    }
-
-    button {
-        background-color: #ff9800;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 1rem;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-        margin: 5px 0;
-    }
-
-    button:hover {
-        background-color: #e68900;
-    }
-
-    input[type="text"] {
-        border: 1px solid #ddd;
-        padding: 10px;
-        border-radius: 5px;
-        width: 50px;
-        text-align: center;
-        margin-right: 10px;
-        margin-left: 10px;
-    }
-
-    /* Customer Phone Input */
-    #customer-phone {
-        width: 100%;
-        max-width: 300px;
-    }
-
-    label {
-        font-weight: bold;
-        margin-bottom: 10px;
-        display: block;
-    }
-
-    button#generate-button {
-        display: block;
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-        margin-top: 20px;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 600px) {
-        .item {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .item-image {
-            width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        button {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        div {
-            padding: 15px;
-        }
-    }
-    </style>
-
+    <div class="customer-details">
+        <label for="customer-phone">Customer WhatsApp Number:</label>
+        <input type="text" id="customer-phone" placeholder="Enter phone number">
+        <button id="generate-button" onclick="generateInvoice()">Generate Invoice</button>
+    </div>
     <script>
+        const items = [
+            { id: 'pizza', name: 'Pizza', price: 99.00 },
+            { id: 'sandwich', name: 'Sandwich', price: 70.00 },
+        ];
+
         function changeQuantity(itemId, change) {
             const quantityInput = document.getElementById(`${itemId}-quantity`);
             let currentQuantity = parseInt(quantityInput.value);
             const newQuantity = Math.max(currentQuantity + change, 0); // Ensure quantity doesn't go below 0
             quantityInput.value = newQuantity;
+
+            updateBillSummary();
+        }
+
+        function updateBillSummary() {
+            const itemList = document.getElementById('item-list');
+            const totalAmountElement = document.getElementById('total-amount');
+            let totalAmount = 0;
+
+            itemList.innerHTML = ''; // Clear previous items
+
+            items.forEach(item => {
+                const quantity = parseInt(document.getElementById(`${item.id}-quantity`).value);
+                if (quantity > 0) {
+                    const total = item.price * quantity;
+                    totalAmount += total;
+
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${item.name} x${quantity} = ₹${total.toFixed(2)}`;
+                    itemList.appendChild(listItem);
+                }
+            });
+
+            totalAmountElement.textContent = totalAmount.toFixed(2);
         }
 
         function generateInvoice() {
-            const items = [
-                { id: 'pizza', name: 'Pizza', price: 99.00 },
-                { id: 'sandwich', name: 'Sandwich', price: 70.00 },
-            ];
-
-            let selectedItems = items.map(item => {
+            const selectedItems = items.map(item => {
                 const quantity = parseInt(document.getElementById(`${item.id}-quantity`).value);
                 return { ...item, quantity, total: item.price * quantity };
             }).filter(item => item.quantity > 0);
-
+        
             if (selectedItems.length === 0) {
                 alert("No items selected!");
                 return;
             }
-
+        
             const invoiceDate = new Date().toLocaleString();
-            const invoiceDetails = selectedItems.map(item => `${item.name} x${item.quantity} = ₹${item.total.toFixed(2)}`).join('\n');
+            const invoiceDetails = selectedItems.map(item => `${item.name} | ${item.quantity} | ${item.total.toFixed(2)}`).join('\n');
             const totalAmount = selectedItems.reduce((sum, item) => sum + item.total, 0).toFixed(2);
-
+        
             const invoiceText = `
                 Invoice Date: ${invoiceDate}
-                ----------------------------------------
+                ---------------------------------------
                 ${invoiceDetails}
-                ----------------------------------------
-                Total: ₹${totalAmount}
+               
             `;
-
+        
             const customerPhone = document.getElementById("customer-phone").value;
             if (customerPhone === "") {
                 alert("Please enter the customer's WhatsApp number!");
                 return;
             }
-
-            saveInvoicePDF(invoiceText, customerPhone);
+        
+            saveInvoicePDF(invoiceText, totalAmount, customerPhone);
         }
-
-        function saveInvoicePDF(invoiceText, customerPhone) {
+        
+        function saveInvoicePDF(invoiceText, totalAmount, customerPhone) {
             fetch('/save-invoice', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ invoice: invoiceText }),
+                body: JSON.stringify({ invoice: invoiceText, totalAmount }),
             }).then(response => response.json())
               .then(data => {
                   console.log('Invoice saved:', data);
@@ -217,7 +344,7 @@
                   alert('Failed to save invoice.');
               });
         }
-
+        
         function createWhatsAppLink(phoneNumber, fileName) {
             const message = `Hello, please find your invoice here: https://cafe-billing-system.onrender.com/bills/${fileName}`;
             const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
